@@ -8,7 +8,8 @@ def send_question(bot, chat_id, question_data):
     """Sends a single question as a poll and its explanation."""
     try:
         topic = question_data.get("topic", "General Knowledge")
-        question = question_data["question"]
+        question_id = question_data.get("id", "N/A")
+        question_text = f"{question_id}. {question_data['question']}"
         options = list(question_data["options"].values())
         answer = question_data["answer"].lower()
         explanation = question_data["explanation"]
@@ -25,7 +26,7 @@ def send_question(bot, chat_id, question_data):
         
         poll_message = bot.send_poll(
             chat_id=chat_id,
-            question=question,
+            question=question_text,
             options=options,
             is_anonymous=False,
             type='quiz',
