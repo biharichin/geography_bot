@@ -37,8 +37,8 @@ def send_question(bot, chat_id, question_data):
 
         bot.send_message(
             chat_id=chat_id,
-            text=f"*Explanation:*
-{explanation}",
+            text=f"""*Explanation:*
+{explanation}""",
             parse_mode='Markdown'
         )
         print(f"Successfully sent question ID {question_data.get('id')} to chat ID {chat_id}.")
