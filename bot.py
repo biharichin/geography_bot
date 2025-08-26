@@ -56,9 +56,6 @@ def main():
         print("Error: Please set the TELEGRAM_TOKEN and TELEGRAM_CHAT_IDS environment variables.")
         return
 
-    # Debugging: Print the start and end of the token to verify it's being read correctly
-    print(f"Token received: {token[:5]}...{token[-5:]}")
-
     bot = telegram.Bot(token=token)
     
     # Load questions from JSON file
