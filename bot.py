@@ -34,7 +34,7 @@ def send_question(bot, chat_id, question_data):
         )
         
         # Pause briefly before sending the explanation
-        time.sleep(10) 
+        time.sleep(20) 
 
         bot.send_message(
             chat_id=chat_id,
@@ -59,6 +59,11 @@ def main():
 
     bot = telegram.Bot(token=token)
     
+    # Send a welcome message
+    for chat_id in chat_ids:
+        bot.send_message(chat_id=chat_id, text="Hello! I am a geography quiz bot. I will send you 10 questions every day. I hope you enjoy it!")
+
+    
     # Load questions from JSON file
     try:
         with open('questions.json', 'r', encoding='utf-8') as f:
@@ -82,13 +87,13 @@ def main():
         print(message)
         return
 
-    end_index = min(start_index + 20, len(questions))
+    end_index = min(start_index + 10, len(questions))
     questions_to_send = questions[start_index:end_index]
 
     for chat_id in chat_ids:
         for question_data in questions_to_send:
             send_question(bot, chat_id, question_data)
-            time.sleep(5)  # Delay between questions
+            time.sleep(10)  # Delay between questions
 
     # Update progress for the next run
     with open(progress_file, 'w') as f:
